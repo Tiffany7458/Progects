@@ -13,3 +13,9 @@ REACH THE SAFEHOUSE BEFORE THE MAN
 GON GETCHU.
 """
 
+CHOICES = """
+    --- YOUR CHOICES ---
+    Q. Quit the game.
+    ---
+"""
+
