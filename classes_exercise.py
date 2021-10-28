@@ -46,5 +46,5 @@ bus = Vehicle("Bus", 10, 300)
 bus.age = 13
 
 a = Bus(29)
-a.fare(29)
+a.fare()
 
