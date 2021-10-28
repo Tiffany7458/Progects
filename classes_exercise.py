@@ -29,7 +29,7 @@ class Vehicle:
         capacity: how many people it can hold
     """
     def __init__(self):
-        self.name = ""
+        self.name =
         self.max_speed = 0
         self.capacity = 0
 
