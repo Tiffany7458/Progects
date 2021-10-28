@@ -20,31 +20,49 @@ Methods:
                 61+ years - Free
 """
 
-class Vehicle():
+class Vehicle:
+    """Represents a vehicle
+
+    Attributes:
+        name: name of the vechicle
+        max_speed: maximum speed in km/h
+        capacity: how many people it can hold
+    """
     def __init__(self):
         self.name = ""
-        self.max_speed = max_speed
-        self.capacity = capacity
+        self.max_speed = 0
+        self.capacity = 0
 
     def vroom(self) -> None:
-        return self.max_speed * 10
+        """Vehicle goes vroom multipled by the amount of speed times"""
+        print("Vroom" * self.max_speed)
 
 class Bus(Vehicle):
-    def __init__(self, age):
-        super().__init__()
-        self.age = age
+    """Bus is a Vehicle that can drive humans around in it"""
+    def fare(self, age: int) -> None:
+        """Tells how much fare is for a particular age"""
 
-    def fare(self, age: float) -> None:
-        if age < 18:
-            print("The fare of the bus ride is $0")
-        if age > 17 and age < 61:
-            print("The fare of the bus ride is $5")
-        if age > 60:
-            print("The fare of the bus ride is $0")
+        if 18<= age <= 60:
+            print("The fare of the bus ride is $5.00")
+        else:
+            print("The fare of the bus ride is $0.00")
 
-bus = Vehicle("Bus", 10, 300)
-bus.age = 13
+a_vehicle = Vehicle()
+a_vehicle.name = "La Ferrari"
+a_vehicle.max_speed = 372
+a_vehicle.capacity = 2
+a_vehicle.vroom()
 
-a = Bus(29)
-a.fare()
-
+a_bus = Bus()
+a_bus.name = "Tranlink Bus - 407"
+a_bus.capacity = 35
+a_bus.max_speed = 140
+a_bus.vroom()
+a_bus.fare(10)
+print()
+a_bus.fare(-1)
+a_bus.fare(0)
+a_bus.fare(17)
+a_bus.fare(18)
+a_bus.fare(60)
+a_bus.fare(61)
