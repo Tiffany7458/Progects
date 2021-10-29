@@ -1,27 +1,30 @@
 # Midnight Rider
+import random
 import sys
 import textwrap
 import time
 import midnight_rider_text
 
 # A text-based game of intrigue and illusion
-
+MAX_FUEL = 50
+MAX_TOFU = 3
 
 class Game:
     """Represent our game engine
 
     Attribute:
         done: describe if the game is finish or not - bool
-    distance_traveled: describe the distance that we've traveled so far this game, in km
-    amount_of_tofu: how much tofu we have left in our inventory
-    agents_distance: discribed the distance between the player and the agents
+        distance_traveled: describe the distance that we've traveled so far this game, in km
+        amount_of_tofu: how much tofu we have left in our inventory
+        agents_distance: discribed the distance between the player and the agents
+        fuel: describes amount of fuel remaining, starts off at 50
     """
     def __init__(self):
         self.done = False
         self.distance_traveled = 0
-        self. amount_of_tofu = 3
-        self.agents_distance = -29
-
+        self. amount_of_tofu = MAX_TOFU
+        self.agents_distance = -20
+        self.fuel = MAX_FUEL
     def introduction(self) -> None:
         """Print the introduction text"""
         self.typewriter_effect(midnight_rider_text.INTRODUCTION)
@@ -45,9 +48,16 @@ class Game:
         user_choice = input().strip(",.?!").lower()
 
         # Base on their choice, change the attributes of the class
+        if user_choice == "d":
+            self.fuel = MAX_FUEL
+
+            self.agents_distance += random.randrange(7, 15)
+
+            print(midnight_rider_text.REFUEL)
         if user_choice == "e":
             print("---Status Check---")
             print(f"Distance Traveled:{self.distance_traveled} kms")
+            print(f"Fuel remaining: {self.fuel} L")
             print(f"Tofu Pieces Left {self.amount_of_tofu}")
             print(f"Agent's Distance {abs(self.agents_distance)} km behind")
             print("------")
