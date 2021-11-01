@@ -46,12 +46,31 @@ class Game:
         """Gets the user's choice and changes the environment"""
         # Get the user's response
         user_choice = input().strip(",.?!").lower()
-
         # Base on their choice, change the attributes of the class
-        if user_choice == "d":
+        agents_distance_now = random.randrange(7, 15)
+
+        if user_choice == "b":
+            slow_traveling = random.randrange(2, 7)
+            self.distance_traveled += slow_traveling
+            self.agents_distance += agents_distance_now - slow_traveling
+            self.fuel -= random.randrange(1, 5)
+            print(f"\n-----You drive conservation")
+            print(f"Slow Traveling {self.distance_traveled} kms")
+        if user_choice == "c":
+            # Move the player
+            player_distance_now = random.randrange(10, 16)
+            self.distance_traveled += player_distance_now
+            # Move the agents
+            self.agents_distance += agents_distance_now - player_distance_now
+            # Burn fuel
+            self.fuel -= random.randrange(5, 11)
+            # Give the player some feedback
+            print(f"\n-------ZOOOOOOOOOOM.")
+            print(f"-------YOU TRAVELED {self.distance_traveled} kms")
+        elif user_choice == "d":
             self.fuel = MAX_FUEL
 
-            self.agents_distance += random.randrange(7, 15)
+            self.agents_distance += agents_distance_now
 
             print(midnight_rider_text.REFUEL)
         if user_choice == "e":
