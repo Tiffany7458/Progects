@@ -9,11 +9,13 @@ import midnight_rider_text
 MAX_FUEL = 50
 MAX_TOFU = 3
 MAX_HUNGER = 50
+MAX_DISTANCE = 100
 
 ENDGAME_REASON = {
     "LOSE_AGENTS": 1,
     "LOSE_FUEL": 2,
-    "LOSE_HUNGER": 3
+    "LOSE_HUNGER": 3,
+    "WIM": 4
 }
 
 class Game:
@@ -125,6 +127,9 @@ class Game:
         if self.hunger > MAX_HUNGER:
             self.done = True
             self.endgame_reason = ENDGAME_REASON["LOSE_HUNGER"]
+        if self.distance_traveled >= MAX_DISTANCE:
+            self.done = True
+            self.endgame_reason = ENDGAME_REASON["WIN"]
 def main() -> None:
     game = Game()  #starting a new game
     # game.introduction()
