@@ -12,7 +12,9 @@ MAX_HUNGER = 50
 
 ENDGAME_REASON = {
     "LOSE_AGENTS": 1,
+    "LOSE_FUEL": 2,
 }
+
 class Game:
     """Represent our game engine
 
@@ -48,7 +50,6 @@ class Game:
 
     def show_choices(self) -> None:
         """Show the user their choices"""
-        time.sleep(1)
         print(midnight_rider_text.CHOICES)
         time.sleep(1)
 
@@ -114,6 +115,9 @@ class Game:
             self.done = True
             # Help with printing the right ending
             self.endgame_reason = ENDGAME_REASON["LOSE_AGENTS"]
+        if self.fuel <= 0:
+            self.done = True
+            self.endgame_reason = ENDGAME_REASON["LOSE_FUEL"]
 def main() -> None:
     game = Game()  #starting a new game
     # game.introduction()
@@ -128,6 +132,8 @@ def main() -> None:
 
     time.sleep(3)
     # Print out the ending
-    game.typewriter_effect(midnight_rider_text.ENDGAME_TEXT[game.endgame_reason])
+    game.typewriter_effect(
+        midnight_rider_text.ENDGAME_TEXT[game.endgame_reason]
+    )
 if __name__ == "__main__":
     main()
