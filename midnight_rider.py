@@ -13,6 +13,7 @@ MAX_HUNGER = 50
 ENDGAME_REASON = {
     "LOSE_AGENTS": 1,
     "LOSE_FUEL": 2,
+    "LOSE_HUNGER": 3
 }
 
 class Game:
@@ -66,14 +67,14 @@ class Game:
                 print(midnight_rider_text.EAT_TOFU)
             else:
                 print(midnight_rider_text.NO_TOFU)
-        if user_choice == "b":
+        elif user_choice == "b":
             slow_traveling = random.randrange(2, 7)
             self.distance_traveled += slow_traveling
             self.agents_distance += agents_distance_now - slow_traveling
             self.fuel -= random.randrange(1, 5)
             print(f"\n-----You drive conservation")
             print(f"-------YOU TRAVELED {self.distance_traveled} kms")
-        if user_choice == "c":
+        elif user_choice == "c":
             # Move the player
             player_distance_now = random.randrange(10, 16)
             self.distance_traveled += player_distance_now
@@ -89,16 +90,19 @@ class Game:
             self.agents_distance += agents_distance_now
             print(midnight_rider_text.REFUEL)
             time.sleep(2)
-        if user_choice == "e":
+        elif user_choice == "e":
             print("---Status Check---")
             print(f"Distance Traveled:{self.distance_traveled} kms")
             print(f"Fuel remaining: {self.fuel} L")
             print(f"Tofu Pieces Left {self.amount_of_tofu}")
             print(f"Agent's Distance {abs(self.agents_distance)} km behind")
             print("------")
-            time.sleep(2)
         elif user_choice == "q":
             self.done = True
+        time.sleep(2)
+
+        if user_choice in ["b", "c", "d"]:
+            self.hunger += random.randrange(8,18)
 
     def upkeep(self) -> None:
         """Give the user remainders of hunger"""
@@ -118,6 +122,9 @@ class Game:
         if self.fuel <= 0:
             self.done = True
             self.endgame_reason = ENDGAME_REASON["LOSE_FUEL"]
+        if self.hunger > MAX_HUNGER:
+            self.done = True
+            self.endgame_reason = ENDGAME_REASON["LOSE_HUNGER"]
 def main() -> None:
     game = Game()  #starting a new game
     # game.introduction()
