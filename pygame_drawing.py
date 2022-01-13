@@ -8,8 +8,8 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 400
+SCREEN_HEIGHT = 800
 SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 WINDOW_TITLE = "Pygame Drawing"
 def main() -> None:
@@ -30,6 +30,7 @@ def main() -> None:
 
         # ---- draw the environment
         screen.fill(WHITE) # fill with bgcolor
+        pygame.draw.rect(screen, RED, [100, 100, 75, 30])
         # update the screen
         pygame.display.flip()
         # ---- clock tick
